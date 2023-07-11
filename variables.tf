@@ -32,13 +32,14 @@ variable "access_control" {
       allowed_caller_ip_address_range = list(string)
     }))
   })
+  default = {}
 }
 
 variable "identity" {
   description = "Specifies the type of Managed Service Identity that should be configured on this resource"
   type = object({
     type         = string
-    identity_ids = optional(list(string))
+    identity_ids = list(string)
   })
   default = null
 }
@@ -55,7 +56,7 @@ variable "logic_app_integration_account_id" {
 
 variable "enabled" {
   type       = bool
-  defdefault = true
+  default = true
 }
 
 variable "workflow_parameters" {
@@ -86,4 +87,14 @@ variable "tags" {
 variable "azure_ad_groups" {
   type    = list(string)
   default = []
+}
+
+variable "rbac_scope_rg" {
+  type = bool
+  default = false
+}
+
+variable "rbac_scope_logic_app" {
+  type = bool
+  default = false
 }
